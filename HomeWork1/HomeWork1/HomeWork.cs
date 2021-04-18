@@ -1,12 +1,10 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Collections.Generic;
 
 namespace HomeWork1
 {
     public class HomeWork
     {
-
         private decimal GetFullPrice(
                                     IEnumerable<string> destinations,
                                     IEnumerable<string> clients,
@@ -21,43 +19,51 @@ namespace HomeWork1
             string currentDestination = default;
             decimal rateEUR = 1.20m;
 
-            if (!(CheckInput(destinations, clients, prices, currencies)))
+            if (!CheckInput(destinations, clients, prices, currencies))
                 return default;
 
-            for (int i = 0; i < clients.Count(); i++)
+            using var clientsEnumerator = clients.GetEnumerator();
+            using var destinationsEnumerator = destinations.GetEnumerator();
+            using var pricesEnumerator = prices.GetEnumerator();
+            using var currenciesEnumerator = currencies.GetEnumerator();
+
+            int i = 0;
+
+            while (clientsEnumerator.MoveNext())
             {
-                destinations.GetEnumerator().MoveNext();
-                clients.GetEnumerator().MoveNext();
-                prices.GetEnumerator().MoveNext();
-                currencies.GetEnumerator().MoveNext();
+                destinationsEnumerator.MoveNext();
+                pricesEnumerator.MoveNext();
+                currenciesEnumerator.MoveNext();
 
+                currentDestination = destinationsEnumerator.Current;
                 previousDestination = currentDestination;
-                currentDestination = destinations.GetEnumerator().Current;
 
-                decimal orderPrice = prices.GetEnumerator().Current;
+                decimal orderPrice = pricesEnumerator.Current;
 
-                if (currencies.GetEnumerator().Current == "EUR")
+                if (currenciesEnumerator.Current == "EUR")
                 {
-                    orderPrice = EURtoUSD(prices.GetEnumerator().Current, rateEUR);
+                    orderPrice = EURtoUSD(pricesEnumerator.Current, rateEUR);
                 }
 
-                if (destinations.GetEnumerator().Current.Contains("Wayne Street")){
+                if (destinationsEnumerator.Current.Contains("Wayne Street"))
+                {
                     orderPrice += 10;
                 }
-                else if(destinations.GetEnumerator().Current.Contains("North Heather Street")){
+                else if (destinationsEnumerator.Current.Contains("North Heather Street"))
+                {
                     orderPrice -= 5.36m;
                 }
 
-                if(CheckInfant(infantsIds, i))
+                if (CheckInfant(infantsIds, i))
                 {
                     discount += 0.5;
                 }
-                else if(CheckChildren(childrenIds, i))
+                else if (CheckChildren(childrenIds, i))
                 {
                     discount += 0.25;
                 }
 
-                if(previousDestination == currentDestination)
+                if (previousDestination == currentDestination)
                 {
                     discount += 0.15;
                 }
@@ -68,7 +74,6 @@ namespace HomeWork1
 
             return fullPrice;
         }
-
 
         private bool CheckInfant(IEnumerable<int> infantsIds, int i)
         {
