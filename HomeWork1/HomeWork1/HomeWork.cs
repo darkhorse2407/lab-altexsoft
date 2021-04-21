@@ -36,9 +36,9 @@ namespace HomeWork1
                 currenciesEnumerator.MoveNext();
 
                 currentDestination = destinationsEnumerator.Current;
-                previousDestination = currentDestination;
 
-                decimal orderPrice = pricesEnumerator.Current;
+                var orderPrice = pricesEnumerator.Current;
+                discount = 0;
 
                 if (currenciesEnumerator.Current == "EUR")
                 {
@@ -63,13 +63,17 @@ namespace HomeWork1
                     discount += 0.25;
                 }
 
-                if (previousDestination == currentDestination)
+                if (i != 0 && GetStreet(previousDestination) == GetStreet(currentDestination))
                 {
                     discount += 0.15;
                 }
 
-                orderPrice = orderPrice * (decimal)discount;
+                previousDestination = currentDestination;
+
+                orderPrice -= orderPrice * (decimal)discount;
                 fullPrice += orderPrice;
+
+                i++;
             }
 
             return fullPrice;
@@ -81,9 +85,14 @@ namespace HomeWork1
             foreach (int infant in infantsIds)
             {
                 if (i == infant)
+                {
                     result = true;
+                    break;
+                }
                 else
+                {
                     result = false;
+                }
             }
 
             return result;
@@ -92,12 +101,17 @@ namespace HomeWork1
         private bool CheckChildren(IEnumerable<int> childrenIds, int i)
         {
             bool result = default;
-            foreach (int infant in childrenIds)
+            foreach (int children in childrenIds)
             {
-                if (i == infant)
+                if (i == children)
+                {
                     result = true;
+                    break;
+                }
                 else
+                {
                     result = false;
+                }
             }
 
             return result;
@@ -105,24 +119,15 @@ namespace HomeWork1
 
         private decimal EURtoUSD(decimal price, decimal rate)
         {
-            decimal USDprice = default;
-
-            USDprice = price * rate;
-
-            return USDprice;
+            return price * rate;
         }
 
         private string GetStreet(string destination)
         {
-            string[] destinationArr = destination.Split(',');
-            List<string> address = new List<string>();
-            string dest = default;
+            var destinationArr = destination.Split(',');
+            var address = destinationArr[0].Split(' ').ToList<string>();
 
-            address = destinationArr[0].Split(' ').ToList<string>();
-
-            dest = string.Join(' ', address.Skip(1));
-
-            return dest;
+            return string.Join(' ', address.Skip(1));
         }
 
         private bool CheckInput(IEnumerable<string> destinations, IEnumerable<string> clients,
