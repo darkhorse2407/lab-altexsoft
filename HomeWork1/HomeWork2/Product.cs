@@ -8,13 +8,18 @@ namespace HomeWork2
 {
     class Product : Entity
     {
-        static string ActionName { get; set; }
-
         public string Name { get; set; }
 
-        static Product()
+        public decimal Price { get; set; }
+
+        public ProductType? ProductType { get; set; }
+
+        public Product(int id, string Name, decimal Price, ProductType? productType) : base(id)
         {
-            ActionName = "Value";
+            Id = id;
+            this.Name = Name;
+            this.Price = Price;
+            ProductType = productType;
         }
 
         public Product(int id) : base(id)
@@ -44,13 +49,53 @@ namespace HomeWork2
         }
     }
 
-    public class Store
+    class Store
     {
-        public void PrintProduct()
+        public string Name { get; set; }
+        public List<Product> assortment = new List<Product>();
+
+        public Store(string Name)
         {
-            var product = new Product(20);
+            this.Name = Name;
+        }
 
+        public void PrintProduct(int id)
+        {
+            Console.WriteLine($"{assortment[id].Name} | {GetValue(assortment[id].ProductType)} | {assortment[id].Price}");
+        }
 
+        public void PrintAssortment()
+        {
+            foreach(Product product in assortment)
+            {
+                Console.WriteLine($"{product.Name} | {GetValue(product.ProductType)} | {product.Price}");
+            }
+        }
+
+        public void AddProduct(Product product)
+        {
+            assortment.Add(product);
+        }
+
+        public void AddProduct(int id, string Name, decimal Price, ProductType? productType)
+        {
+            var product = new Product(id, Name, Price, productType);
+            assortment.Add(product);
+        }
+
+        string GetValue(ProductType? productType)
+        {
+            return productType switch
+            {
+                ProductType.None => "None",
+                ProductType.Vegetable => "Vegetable",
+                ProductType.Fruit => "Fruit",
+                ProductType.Pizza => "Pizza",
+                ProductType.Meat => "Meat",
+                ProductType.Drink => "Drink",
+                ProductType.Sushi => "Sushi",
+                _ => throw new ArgumentNullException()
+            };
         }
     }
 
@@ -81,10 +126,27 @@ namespace HomeWork2
         {
             return productType switch
             {
-                ProductType.None => throw new NotImplementedException(),
-                ProductType.Computer => throw new NotImplementedException(),
-                ProductType.Tv => throw new NotImplementedException(),
+                ProductType.None => "None",
+                ProductType.Vegetable => "Vegetable",
+                ProductType.Fruit => "Fruit",
+                ProductType.Pizza => "Pizza",
+                ProductType.Meat => "Meat",
+                ProductType.Drink => "Drink",
+                ProductType.Sushi => "Sushi",
+                _ => throw new ArgumentNullException()
             };
         }
+    }
+
+    [Flags]
+    public enum ProductType
+    {
+        None,
+        Vegetable,
+        Fruit,
+        Pizza,
+        Meat,
+        Drink,
+        Sushi
     }
 }

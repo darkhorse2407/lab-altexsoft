@@ -7,28 +7,25 @@ using System.Threading.Tasks;
 namespace HomeWork2
 {
     class Person : IPersonable
-    {
+    {   
+        public int id { get; set; }
+
         public string NameInit { get; init; }
 
-        public ProductType? ProductType { get; set; }
+        public Person(int id, string NameInit)
+        {
+            this.id = id;
+            this.NameInit = NameInit;
+        }
 
         public void CreatePerson(int id)
         {
-            throw new NotImplementedException();
+            Person person = new Person(id, NameInit);
         }
 
         public void DeletePerson(PersonStruct person)
         {
             throw new NotImplementedException();
         }
-    }
-
-    [Flags]
-    public enum ProductType
-    {
-        None,
-        Tv,
-        Computer,
-        Cellphone,
     }
 }
