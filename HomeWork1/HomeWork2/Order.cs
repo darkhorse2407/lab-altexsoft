@@ -6,37 +6,43 @@ using System.Threading.Tasks;
 
 namespace HomeWork2
 {
-    class Order
+    public class Order
     {
-        decimal orderPrice { get; set; }
-        Store seller { get; set; }
-        Client client { get; set; }
-        public List<Product> products = new List<Product>();
+        private decimal Order_Price { get; set; }
+        public decimal OrderPrice { get {
+                foreach (Product product in Products)
+                    Order_Price += product.Price;
+                return Order_Price;
+            } 
+        }
+        private Store Seller { get; set; }
+        private Client Client { get; set; }
+        private List<Product> Products = new List<Product>();
 
         public Order(Store seller, Client client)
         {
-            this.seller = seller;
-            this.client = client;
+            this.Seller = seller;
+            this.Client = client;
         }
 
         public void AddProduct(Product product)
         {
-            products.Add(product);
+            Products.Add(product);
         }
 
-        public decimal GetOrderPrice()
+        public Client GetClient()
         {
-            foreach(Product product in products)
-                orderPrice += product.Price;
-            return orderPrice;
+            return Client;
         }
 
-        public void GetProducts()
+        public Store GetSeller()
         {
-            foreach(Product product in products)
-            {
-                Console.WriteLine($"{product.Name} | {product.Price}");
-            }
+            return Seller;
+        }
+
+        public List<Product> GetProducts()
+        {
+            return Products;
         }
     }
 }

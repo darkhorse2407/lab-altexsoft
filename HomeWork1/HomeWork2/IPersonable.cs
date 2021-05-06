@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace HomeWork2
 {
-    interface IPersonable
+    public interface IPersonable
     {
         void CreatePerson(int id);
-        void DeletePerson(PersonStruct person);
+        //void DeletePerson(PersonStruct person);
     }
 }

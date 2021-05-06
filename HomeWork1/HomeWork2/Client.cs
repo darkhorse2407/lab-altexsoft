@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace HomeWork2
 {
-    class Client : PersonAbstract
+    public class Client : PersonAbstract
     {
-        int id { get; set; }
+        private int id { get; set; }
 
-        public new string Name { get; set; }
+        private new string Name { get; set; }
 
         public Client(int id, string Name) : base(id)
         {
