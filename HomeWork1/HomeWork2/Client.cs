@@ -8,11 +8,11 @@ namespace HomeWork2
 {
     public class Client : PersonAbstract
     {
-        private int id { get; set; }
+        public int id { get; set; }
 
-        private new string Name { get; set; }
+        public new string Name { get; set; }
 
-        public Client(int id, string Name) : base(id)
+        public Client(int id, string Name)
         {
             this.id = id;
             this.Name = Name;

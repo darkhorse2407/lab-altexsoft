@@ -11,10 +11,5 @@ namespace HomeWork2
         public string Name { get; set; }
 
         public abstract string GetFullname();
-
-        public PersonAbstract(int id)
-        {
-
-        }
     }
 }

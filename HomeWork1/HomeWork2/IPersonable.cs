@@ -9,6 +9,5 @@ namespace HomeWork2
     public interface IPersonable
     {
         void CreatePerson(int id);
-        //void DeletePerson(PersonStruct person);
     }
 }

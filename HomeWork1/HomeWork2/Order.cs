@@ -8,41 +8,22 @@ namespace HomeWork2
 {
     public class Order
     {
-        private decimal Order_Price { get; set; }
+        private decimal _orderPrice;
         public decimal OrderPrice { get {
                 foreach (Product product in Products)
-                    Order_Price += product.Price;
-                return Order_Price;
+                    _orderPrice += product.Price;
+                return _orderPrice;
             } 
+            set { }
         }
-        private Store Seller { get; set; }
-        private Client Client { get; set; }
-        private List<Product> Products = new List<Product>();
+        public Store Seller { get; set; }
+        public Client Client { get; set; }
+        public List<Product> Products = new List<Product>();
 
         public Order(Store seller, Client client)
         {
             this.Seller = seller;
             this.Client = client;
-        }
-
-        public void AddProduct(Product product)
-        {
-            Products.Add(product);
-        }
-
-        public Client GetClient()
-        {
-            return Client;
-        }
-
-        public Store GetSeller()
-        {
-            return Seller;
-        }
-
-        public List<Product> GetProducts()
-        {
-            return Products;
         }
     }
 }

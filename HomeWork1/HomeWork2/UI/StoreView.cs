@@ -10,20 +10,25 @@ namespace HomeWork2.UI
     {
         public void PrintProduct(Store store, int id)
         {
-            Console.WriteLine($"{store.GetProduct(id).Name} | {store.GetProductName(store.GetProduct(id).ProductType)} | {store.GetProduct(id).Price}");
+            Console.WriteLine($"{store.Assortment[id].Name} | {store.Assortment[id].ProductType} | {store.Assortment[id].Price}");
+        }
+
+        public void PrintProduct(Product product)
+        {
+            Console.WriteLine($"{product.Name} | {product.ProductType} | {product.Price}");
         }
 
         public void PrintAssortment(Store store)
         {
-            foreach (Product product in store.GetAssortment())
+            foreach (Product product in store.Assortment)
             {
-                Console.WriteLine($"{product.Name} | {store.GetProductName(product.ProductType)} | {product.Price}");
+                Console.WriteLine($"{product.Name} | {product.ProductType} | {product.Price}");
             }
         }
 
         public void PrintStoreName(Store store)
         {
-            Console.WriteLine($"Store name: \"{store.GetStoreName()}\"");
+            Console.WriteLine($"Store name: \"{store.Name}\"");
         }
     }
 }
