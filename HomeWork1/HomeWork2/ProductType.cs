@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 namespace HomeWork2
 {
-    public abstract class PersonAbstract
+    [Flags]
+    public enum ProductType
     {
-        public string Name { get; set; }
-
-        public abstract string GetFullname();
+        None,
+        Vegetable,
+        Fruit,
+        Pizza,
+        Meat,
+        Drink,
+        Sushi
     }
 }

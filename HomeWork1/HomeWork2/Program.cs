@@ -32,8 +32,5 @@ namespace HomeWork2
 
             Console.ReadLine();
         }
-
-
-        public record ProductRecord(int Id);
     }
 }

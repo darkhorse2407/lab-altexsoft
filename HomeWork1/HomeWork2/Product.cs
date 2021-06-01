@@ -21,28 +21,5 @@ namespace HomeWork2
             this.Price = price;
             ProductType = productType;
         }
-
-        public Product(int id) : base(id)
-        {
-
-        }
-
-        public override decimal GetFullPrice()
-        {
-            var value = base.GetFullPrice();
-            return value + 20;
-        }
-    }
-
-    [Flags]
-    public enum ProductType
-    {
-        None,
-        Vegetable,
-        Fruit,
-        Pizza,
-        Meat,
-        Drink,
-        Sushi
     }
 }

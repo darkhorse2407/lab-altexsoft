@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace HomeWork2
 {
-    public class Entity
+    public abstract class Person
     {
-        public int Id { get; set; }
+        public string Name { get; set; }
 
-        public Entity(int id)
-        {
-            Id = id;
-        }
+        public abstract string GetFullname();
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HomeWork2
 {
-    public class Client : PersonAbstract
+    public class Client : Person
     {
         public int id { get; set; }
 
